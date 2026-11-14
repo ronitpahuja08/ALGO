@@ -3,11 +3,13 @@ var movingRect, fixedRect, isPointerMode = true;
 var collisions = 0, wasOverlapping = false;
 var INITIAL_MOVING = { x: 180, y: 180 };
 var INITIAL_FIXED = { x: 470, y: 210 };
+var lastStatus = '';
 function setup() {
   var canvas = createCanvas(800, 410);
   canvas.parent('demo');
   fixedRect = createSprite(INITIAL_FIXED.x, INITIAL_FIXED.y, 145, 120);
   movingRect = createSprite(INITIAL_MOVING.x, INITIAL_MOVING.y, 130, 95);
+  select('#reset-lab').mousePressed(resetLab);
 }
 function resetLab() {
   collisions = 0; wasOverlapping = false; isPointerMode = false;
@@ -36,6 +38,8 @@ function draw() {
   const movingBounds = { x: movingRect.position.x, y: movingRect.position.y, width: movingRect.width, height: movingRect.height };
   const overlap = intersectionRectangle(fixedBounds, movingBounds);
   const overlapping = overlap !== null;
+  const status = overlapping ? 'Collision detected' : 'No collision';
+  if (status !== lastStatus) { select('#lab-status').html(status); lastStatus = status; }
   if (overlapping && !wasOverlapping) collisions++;
   wasOverlapping = overlapping;
   fixedRect.shapeColor = overlapping ? color(255, 199, 93) : color(87, 111, 233);
@@ -46,7 +50,7 @@ function draw() {
     rect(overlap.x, overlap.y, overlap.width, overlap.height); pop();
   }
   noStroke(); fill(25, 40, 65); textSize(18);
-  text(overlapping ? 'COLLISION DETECTED' : 'NO COLLISION', 18, 30);
+  text(status.toUpperCase(), 18, 30);
   textSize(13); text('Collision entries: ' + collisions, 18, 52);
   text('Overlap area: ' + Math.round(overlap ? overlap.width * overlap.height : 0) + ' px²', 18, 74);
   fill(255, 255, 255, 210); rect(16, height - 45, 290, 28, 6);
