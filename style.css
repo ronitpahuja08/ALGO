@@ -1,1 +1,20 @@
-*{box-sizing:border-box}html,body{margin:0}body{font-family:system-ui,Arial,sans-serif;color:#17243d;background:linear-gradient(140deg,#f1f5ff,#fdfdfd);padding:32px 16px;min-height:100vh}main{max-width:900px;margin:auto}.tag{color:#5c61b8;font-size:12px;letter-spacing:.18em;font-weight:800}h1{font-size:clamp(50px,9vw,88px);letter-spacing:-.09em;margin:5px 0}h1 span{color:#596be7}.lede{line-height:1.6;max-width:700px;color:#48566d}#demo{border:2px solid #24324b;border-radius:18px;box-shadow:12px 12px 0 #dde4fb;overflow:hidden;margin:26px 0}canvas{display:block;width:100%!important;height:auto!important;touch-action:none}.details{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.details>div{background:white;padding:18px;border-radius:14px;border:1px solid #dfe5f2}.details p{margin:6px 0 0;color:#52617b;font-size:14px}.formula{color:#45526c;background:#fff;padding:18px;border-left:4px solid #596be7;border-radius:6px;line-height:1.6}@media(max-width:600px){.details{grid-template-columns:1fr}}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: linear-gradient(140deg, #f1f5ff, #fdfdfd); color: #17243d; font-family: system-ui, Arial, sans-serif; min-height: 100vh; padding: 32px 16px; }
+main { margin: auto; max-width: 900px; }
+.tag { color: #5c61b8; font-size: 12px; font-weight: 800; letter-spacing: .18em; }
+h1 { font-size: clamp(50px, 9vw, 88px); letter-spacing: -.09em; margin: 5px 0; }
+h1 span { color: #596be7; }
+.lede { color: #48566d; line-height: 1.6; max-width: 700px; }
+#demo { border: 2px solid #24324b; border-radius: 18px; box-shadow: 12px 12px 0 #dde4fb; margin: 26px 0; overflow: hidden; }
+canvas { display: block; height: auto !important; touch-action: none; width: 100% !important; }
+.lab-actions { align-items: center; display: flex; gap: 14px; margin: -8px 0 24px; }
+.lab-actions button { appearance: none; background: #24324b; border: 0; border-radius: 8px; color: #fff; cursor: pointer; font: inherit; font-weight: 700; padding: 10px 14px; }
+.lab-actions button:hover { background: #384969; }
+.lab-actions button:focus-visible { outline: 3px solid #f2b84b; outline-offset: 3px; }
+#lab-status { color: #45526c; font-weight: 700; }
+.details { display: grid; gap: 15px; grid-template-columns: repeat(3, 1fr); }
+.details > div { background: white; border: 1px solid #dfe5f2; border-radius: 14px; padding: 18px; }
+.details p { color: #52617b; font-size: 14px; margin: 6px 0 0; }
+.formula { background: #fff; border-left: 4px solid #596be7; border-radius: 6px; color: #45526c; line-height: 1.6; padding: 18px; }
+@media (max-width: 600px) { .details { grid-template-columns: 1fr; } .lab-actions { align-items: flex-start; flex-direction: column; gap: 8px; } }
