@@ -44,6 +44,14 @@
     return point.x >= edges.left && point.x <= edges.right &&
       point.y >= edges.top && point.y <= edges.bottom;
   }
+  function minimumTranslationVector(a, b) {
+    const overlap = intersectionRectangle(a, b);
+    if (!overlap) return null;
+    if (overlap.width <= overlap.height) {
+      return { x: a.x <= b.x ? -overlap.width : overlap.width, y: 0 };
+    }
+    return { x: 0, y: a.y <= b.y ? -overlap.height : overlap.height };
+  }
   function overlapArea(a, b) {
     const overlap = intersectionRectangle(a, b);
     return overlap ? overlap.width * overlap.height : 0;
@@ -54,5 +62,6 @@
   root.rectangleEdges = rectangleEdges;
   root.intersectionRectangle = intersectionRectangle;
   root.containsPoint = containsPoint;
-  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, overlapArea };
+  root.minimumTranslationVector = minimumTranslationVector;
+  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, minimumTranslationVector, overlapArea };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
