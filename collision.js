@@ -22,15 +22,30 @@
       first.right > second.left && first.top < second.bottom &&
       first.bottom > second.top);
   }
+  function intersectionRectangle(a, b) {
+    const first = rectangleEdges(a);
+    const second = rectangleEdges(b);
+    if (!first || !second) return null;
+    const left = Math.max(first.left, second.left);
+    const right = Math.min(first.right, second.right);
+    const top = Math.max(first.top, second.top);
+    const bottom = Math.min(first.bottom, second.bottom);
+    if (left >= right || top >= bottom) return null;
+    return {
+      x: (left + right) / 2,
+      y: (top + bottom) / 2,
+      width: right - left,
+      height: bottom - top
+    };
+  }
   function overlapArea(a, b) {
-    if (!rectanglesOverlap(a, b)) return 0;
-    const overlapWidth = (a.width + b.width) / 2 - Math.abs(a.x - b.x);
-    const overlapHeight = (a.height + b.height) / 2 - Math.abs(a.y - b.y);
-    return Math.max(0, overlapWidth) * Math.max(0, overlapHeight);
+    const overlap = intersectionRectangle(a, b);
+    return overlap ? overlap.width * overlap.height : 0;
   }
   root.overlapArea = overlapArea;
   root.rectanglesOverlap = rectanglesOverlap;
   root.isValidRectangle = isValidRectangle;
   root.rectangleEdges = rectangleEdges;
-  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, overlapArea };
+  root.intersectionRectangle = intersectionRectangle;
+  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, overlapArea };
 })(typeof globalThis !== 'undefined' ? globalThis : this);

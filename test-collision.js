@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const {rectanglesOverlap,overlapArea} = require('./collision.js');
+const {rectanglesOverlap,overlapArea,intersectionRectangle} = require('./collision.js');
 const a = {x:0,y:0,width:10,height:10};
 assert.equal(rectanglesOverlap(a,{x:0,y:0,width:10,height:10}),true);
 assert.equal(rectanglesOverlap(a,{x:9,y:0,width:10,height:10}),true);
@@ -11,4 +11,6 @@ assert.equal(overlapArea(a,{x:0,y:0,width:10,height:10}),100);
 assert.equal(overlapArea(a,{x:5,y:0,width:10,height:10}),50);
 assert.equal(overlapArea(a,{x:10,y:0,width:10,height:10}),0);
 assert.equal(overlapArea(a,{x:0,y:0,width:-1,height:10}),0);
-console.log('10 collision geometry checks passed');
+assert.deepEqual(intersectionRectangle(a,{x:5,y:0,width:10,height:10}),{x:2.5,y:0,width:5,height:10});
+assert.equal(intersectionRectangle(a,{x:10,y:0,width:10,height:10}),null);
+console.log('12 collision geometry checks passed');
