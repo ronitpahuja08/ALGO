@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const {rectanglesOverlap,overlapArea,intersectionRectangle,containsPoint,minimumTranslationVector} = require('./collision.js');
+const {rectanglesOverlap,overlapArea,intersectionRectangle,containsPoint,minimumTranslationVector,rectangleEdges} = require('./collision.js');
 const a = {x:0,y:0,width:10,height:10};
 assert.equal(rectanglesOverlap(a,{x:0,y:0,width:10,height:10}),true);
 assert.equal(rectanglesOverlap(a,{x:9,y:0,width:10,height:10}),true);
@@ -19,4 +19,10 @@ assert.equal(containsPoint(a,{x:'0',y:0}),false);
 assert.deepEqual(minimumTranslationVector(a,{x:8,y:0,width:10,height:10}),{x:-2,y:0});
 assert.deepEqual(minimumTranslationVector(a,{x:0,y:8,width:10,height:10}),{x:0,y:-2});
 assert.equal(minimumTranslationVector(a,{x:10,y:0,width:10,height:10}),null);
-console.log('18 collision geometry checks passed');
+assert.equal(rectangleEdges({x:0,y:0,width:0,height:1}),null);
+assert.equal(rectanglesOverlap(null,a),false);
+assert.equal(overlapArea({x:0,y:0,width:10,height:10},{x:5,y:5,width:10,height:10}),25);
+assert.deepEqual(intersectionRectangle({x:0,y:0,width:10,height:10},{x:5,y:5,width:10,height:10}),{x:2.5,y:2.5,width:5,height:5});
+assert.deepEqual(minimumTranslationVector({x:0,y:0,width:10,height:10},{x:5,y:5,width:10,height:10}),{x:-5,y:0});
+assert.equal(containsPoint({x:0,y:0,width:10,height:10},{x:5,y:-5}),true);
+console.log('24 collision geometry checks passed');
