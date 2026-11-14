@@ -1,17 +1,23 @@
 // Interactive axis-aligned bounding box (AABB) collision visualizer.
 var movingRect, fixedRect, isPointerMode = true;
 var collisions = 0, wasOverlapping = false;
+var INITIAL_MOVING = { x: 180, y: 180 };
+var INITIAL_FIXED = { x: 470, y: 210 };
 function setup() {
   var canvas = createCanvas(800, 410);
   canvas.parent('demo');
-  fixedRect = createSprite(470, 210, 145, 120);
-  movingRect = createSprite(180, 180, 130, 95);
+  fixedRect = createSprite(INITIAL_FIXED.x, INITIAL_FIXED.y, 145, 120);
+  movingRect = createSprite(INITIAL_MOVING.x, INITIAL_MOVING.y, 130, 95);
+}
+function resetLab() {
+  collisions = 0; wasOverlapping = false; isPointerMode = false;
+  movingRect.position.x = INITIAL_MOVING.x; movingRect.position.y = INITIAL_MOVING.y;
 }
 function mouseMoved() { isPointerMode = true; }
 function touchMoved() { isPointerMode = true; return false; }
 function keyPressed() {
   if ([37, 38, 39, 40].indexOf(keyCode) !== -1) isPointerMode = false;
-  if (key === 'r' || key === 'R') { collisions = 0; wasOverlapping = false; }
+  if (key === 'r' || key === 'R') resetLab();
 }
 function draw() {
   background(245, 248, 252);
