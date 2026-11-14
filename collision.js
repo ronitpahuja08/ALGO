@@ -38,6 +38,12 @@
       height: bottom - top
     };
   }
+  function containsPoint(rectangle, point) {
+    const edges = rectangleEdges(rectangle);
+    if (!edges || !point || !Number.isFinite(point.x) || !Number.isFinite(point.y)) return false;
+    return point.x >= edges.left && point.x <= edges.right &&
+      point.y >= edges.top && point.y <= edges.bottom;
+  }
   function overlapArea(a, b) {
     const overlap = intersectionRectangle(a, b);
     return overlap ? overlap.width * overlap.height : 0;
@@ -47,5 +53,6 @@
   root.isValidRectangle = isValidRectangle;
   root.rectangleEdges = rectangleEdges;
   root.intersectionRectangle = intersectionRectangle;
-  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, overlapArea };
+  root.containsPoint = containsPoint;
+  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, overlapArea };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
