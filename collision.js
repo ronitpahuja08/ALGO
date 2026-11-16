@@ -56,6 +56,15 @@
     const overlap = intersectionRectangle(a, b);
     return overlap ? overlap.width * overlap.height : 0;
   }
+  function translateRectangle(rectangle, delta) {
+    if (!isValidRectangle(rectangle) || !delta || !Number.isFinite(delta.x) || !Number.isFinite(delta.y)) return null;
+    return {
+      x: rectangle.x + delta.x,
+      y: rectangle.y + delta.y,
+      width: rectangle.width,
+      height: rectangle.height
+    };
+  }
   root.overlapArea = overlapArea;
   root.rectanglesOverlap = rectanglesOverlap;
   root.isValidRectangle = isValidRectangle;
@@ -63,5 +72,6 @@
   root.intersectionRectangle = intersectionRectangle;
   root.containsPoint = containsPoint;
   root.minimumTranslationVector = minimumTranslationVector;
-  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, minimumTranslationVector, overlapArea };
+  root.translateRectangle = translateRectangle;
+  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, minimumTranslationVector, overlapArea, translateRectangle };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
