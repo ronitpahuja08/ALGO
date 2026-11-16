@@ -65,6 +65,21 @@
       height: rectangle.height
     };
   }
+  function clampRectangle(rectangle, bounds) {
+    const rectangleBounds = rectangleEdges(rectangle);
+    const containerBounds = rectangleEdges(bounds);
+    if (!rectangleBounds || !containerBounds || rectangle.width > bounds.width || rectangle.height > bounds.height) return null;
+    const minimumX = containerBounds.left + rectangle.width / 2;
+    const maximumX = containerBounds.right - rectangle.width / 2;
+    const minimumY = containerBounds.top + rectangle.height / 2;
+    const maximumY = containerBounds.bottom - rectangle.height / 2;
+    return {
+      x: Math.min(Math.max(rectangle.x, minimumX), maximumX),
+      y: Math.min(Math.max(rectangle.y, minimumY), maximumY),
+      width: rectangle.width,
+      height: rectangle.height
+    };
+  }
   root.overlapArea = overlapArea;
   root.rectanglesOverlap = rectanglesOverlap;
   root.isValidRectangle = isValidRectangle;
@@ -73,5 +88,6 @@
   root.containsPoint = containsPoint;
   root.minimumTranslationVector = minimumTranslationVector;
   root.translateRectangle = translateRectangle;
-  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, minimumTranslationVector, overlapArea, translateRectangle };
+  root.clampRectangle = clampRectangle;
+  if (typeof module !== 'undefined') module.exports = { isValidRectangle, rectangleEdges, rectanglesOverlap, intersectionRectangle, containsPoint, minimumTranslationVector, overlapArea, translateRectangle, clampRectangle };
 })(typeof globalThis !== 'undefined' ? globalThis : this);
